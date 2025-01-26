@@ -2,92 +2,129 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Capybara Game</title>
     <style>
-        body {
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #87ceeb;
-            overflow: hidden;
-        }
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #87ceeb;
+    overflow: hidden;
+}
 
-        canvas {
-            background-color: #32cd32;
-            border: 2px solid #000;
-            display: none; /* Canvas скрыт по умолчанию */
-        }
+canvas {
+    background-color: #32cd32;
+    border: 2px solid #000;
+    display: none; /* Canvas скрыт по умолчанию */
+}
 
-        #mainMenu, #pauseMenu {
-            text-align: center;
-        }
+#mainMenu, #pauseMenu {
+    text-align: center;
+}
 
-        #mainMenu button, #gameControls button, #pauseMenu button {
-            padding: 15px;
-            font-size: 20px;
-            margin: 10px;
-        }
+#mainMenu button, #gameControls button, #pauseMenu button {
+    padding: 15px;
+    font-size: 20px;
+    margin: 10px;
+}
 
-        #gameControls {
-            display: none; /* Элементы управления скрыты по умолчанию */
-            text-align: center;
-        }
+#gameControls {
+    display: none; /* Элементы управления скрыты по умолчанию */
+    text-align: center;
+}
 
-        #pauseMenu {
-            display: none; /* Меню паузы скрыто по умолчанию */
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            border-radius: 10px;
-        }
+#pauseMenu {
+    display: none; /* Меню паузы скрыто по умолчанию */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+}
 
-        #mobileControls {
-            display: none; /* По умолчанию скрыты */
-            position: fixed;
-            bottom: 20px; /* Отступ снизу */
-            width: 100%;
-            text-align: center;
-            margin-top: 20px; /* Отступ сверху */
-        }
+#mobileControls {
+    display: none; /* По умолчанию скрыты */
+    position: fixed;
+    bottom: 20px; /* Отступ снизу */
+    width: 100%;
+    text-align: center;
+    margin-top: 20px; /* Отступ сверху */
+}
 
-        #mobileControls button {
-            display: inline-block;
-            margin: 0 10px;
-            padding: 15px;
-            font-size: 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #ccc;
-            cursor: pointer;
-        }
+#mobileControls button {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 15px;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ccc;
+    cursor: pointer;
+}
 
-        /* Адаптация для мобильных устройств */
-        @media only screen and (max-width: 600px) {
-            #mobileControls {
-                display: block; /* Показываем кнопки */
-            }
+/* Адаптация для мобильных устройств */
+@media only screen and (max-width: 600px) {
+    #mobileControls {
+        display: block; /* Показываем кнопки */
+    }
 
-            canvas {
-                width: 100%; /* Канвас занимает всю ширину экрана */
-                height: auto; /* Автоматическая высота */
-            }
+    
 
-            #mainMenu {
-                margin-top: 20px; /* Отступ сверху для главного меню */
-            }
+    canvas {
+        width: 100%; /* Канвас занимает всю ширину экрана */
+        height: auto; /* Автоматическая высота */
+    }
 
-            #mainMenu button {
-                font-size: 18px; /* Уменьшаем размер шрифта для мобильных устройств */
-                padding: 10px;
-            }
-        }
+    #mainMenu {
+        margin-top: 20px; /* Отступ сверху для главного меню */
+    }
+
+    #mainMenu button {
+        font-size: 18px; /* Уменьшаем размер шрифта для мобильных устройств */
+        padding: 10px;
+    }
+}
+
+#gameOverMenu {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 1000;
+}
+
+#gameOverMenu button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#gameOverMenu button:hover {
+    background-color: #45a049;
+}
+
+#mobileControls button {
+    -webkit-tap-highlight-color: transparent; /* Убирает подсветку при касании */
+    -webkit-touch-callout: none; /* Отключает вызов контекстного меню */
+    user-select: none; /* Запрещает выделение текста */
+    touch-action: manipulation; /* Оптимизирует поведение касаний */
+}
     </style>
 </head>
 <body>
@@ -109,6 +146,11 @@
         <button id="leftBtn">←</button>
         <button id="pauseBtn">Пауза</button>
         <button id="rightBtn">→</button>
+    </div>
+    <div id="gameOverMenu" style="display: none;">
+        <h1>Игра окончена!</h1>
+        <p>Ваш счет: <span id="finalScore">0</span></p>
+        <button id="restartGameBtn">Играть снова</button>
     </div>
     <script src="script.js"></script>
 </body>

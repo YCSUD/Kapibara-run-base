@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let fruitInterval;
 
     // Переменная для отслеживания последней сотни
-    let lastHundred = 0;
+    let lastHundred = -1;
 
     // Функция для запуска обычного интервала
     function startNormalObstacleGeneration() {
@@ -125,12 +125,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 capybara.x + capybara.width > obstacle.x &&
                 capybara.y < obstacle.y + obstacle.height &&
                 capybara.height + capybara.y > obstacle.y) {
-                saveScore(); // Сохраняем счет перед сбросом игры
-                resetGame();
-                hideMainMenu();
+                saveScore(); // Сохраняем счет
+                showGameOverMenu(); // Показываем окно при поражении
+                isGameRunning = false; // Останавливаем игру
+                resetGame(); // Сбрасываем игру
             }
         });
-
+    
         fruits.forEach((fruit, index) => {
             if (capybara.x < fruit.x + fruit.width &&
                 capybara.x + capybara.width > fruit.x &&
@@ -181,12 +182,13 @@ document.addEventListener('DOMContentLoaded', () => {
             gameSpeed += 2; // Увеличиваем скорость игры на 2
             speedCapybar += 2; // Увеличиваем скорость капибары на 2
             lastHundred = currentHundred; // Обновляем последнюю сотню
-
+    
             if (isChallengeMode) {
                 // Активируем обратное управление с шансом 50%
                 if (Math.random() < 0.5) {
                     activateReverseControls();
                 }
+    
                 // Активируем перемещение препятствий с шансом 50%
                 if (Math.random() < 0.5) {
                     activateMovingObstacles();
@@ -222,22 +224,22 @@ document.addEventListener('DOMContentLoaded', () => {
         obstacles = [];
         fruits = [];
         score = 0;
-        gameSpeed = initialGameSpeed;
-        speedCapybar = initialSpeedCapybar;
+        gameSpeed = initialGameSpeed; // Сбрасываем скорость игры
+        speedCapybar = initialSpeedCapybar; // Сбрасываем скорость капибары
         capybara.x = canvas.width / 2 - 25;
         capybara.y = canvas.height - 70;
         isPaused = false;
-        isReversedControls = false; // Сбрасываем обратное управление
-        isMovingObstacles = false; // Сбрасываем перемещение препятствий
-        lastHundred = 0; // Сбрасываем последнюю сотню
-
+        isReversedControls = false;
+        isMovingObstacles = false;
+        lastHundred = 0;
+    
         if (obstacleInterval) {
             clearInterval(obstacleInterval);
         }
         if (fruitInterval) {
             clearInterval(fruitInterval);
         }
-
+    
         startNormalObstacleGeneration();
         fruitInterval = setInterval(() => {
             if (!isPaused && isGameRunning) {
@@ -264,6 +266,19 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('mobileControls').style.display = 'block';
         document.getElementById('gameControls').style.display = 'block';
         isPaused = false;
+    }
+
+    function showGameOverMenu() {
+        // Показываем окно
+        document.getElementById('gameOverMenu').style.display = 'block';
+    
+        // Обновляем счет в окне
+        document.getElementById('finalScore').textContent = score;
+    }
+    
+    function hideGameOverMenu() {
+        // Скрываем окно
+        document.getElementById('gameOverMenu').style.display = 'none';
     }
 
     // Show pause menu
@@ -371,6 +386,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Resume game from pause menu
     document.getElementById('resumeGameBtn').addEventListener('click', () => {
         togglePause();
+    });
+
+    document.getElementById('restartGameBtn').addEventListener('click', () => {
+        hideGameOverMenu(); // Скрываем окно
+        resetGame(); // Сбрасываем игру
+        isGameRunning = true; // Запускаем игру
+        gameLoop(); // Запускаем игровой цикл
     });
 
     // Event listeners for key presses (keyboard)

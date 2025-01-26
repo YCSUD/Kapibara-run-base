@@ -44,9 +44,10 @@ canvas {
 #mobileControls {
     display: none; /* По умолчанию скрыты */
     position: fixed;
-    bottom: 10px;
+    bottom: 20px; /* Отступ снизу */
     width: 100%;
     text-align: center;
+    margin-top: 20px; /* Отступ сверху */
 }
 
 #mobileControls button {
@@ -60,9 +61,53 @@ canvas {
     cursor: pointer;
 }
 
-/* Показываем кнопки только на экранах меньше 600px */
+/* Адаптация для мобильных устройств */
 @media only screen and (max-width: 600px) {
     #mobileControls {
         display: block; /* Показываем кнопки */
     }
+
+    
+
+    canvas {
+        width: 100%; /* Канвас занимает всю ширину экрана */
+        height: auto; /* Автоматическая высота */
+    }
+
+    #mainMenu {
+        margin-top: 20px; /* Отступ сверху для главного меню */
+    }
+
+    #mainMenu button {
+        font-size: 18px; /* Уменьшаем размер шрифта для мобильных устройств */
+        padding: 10px;
+    }
+}
+
+#gameOverMenu {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 1000;
+}
+
+#gameOverMenu button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#gameOverMenu button:hover {
+    background-color: #45a049;
 }
