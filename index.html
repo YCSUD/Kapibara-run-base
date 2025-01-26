@@ -58,14 +58,13 @@ canvas {
 }
 
 #mobileControls button {
-    display: inline-block;
-    margin: 0 10px;
-    padding: 15px;
-    font-size: 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #ccc;
-    cursor: pointer;
+    -webkit-tap-highlight-color: transparent; /* Убирает подсветку при касании */
+    -webkit-touch-callout: none; /* Отключает вызов контекстного меню */
+    user-select: none; /* Запрещает выделение текста */
+    touch-action: manipulation; /* Оптимизирует поведение касаний */
+    -webkit-user-select: none; /* Для Safari */
+    -moz-user-select: none; /* Для Firefox */
+    -ms-user-select: none; /* Для Internet Explorer/Edge */
 }
 
 /* Адаптация для мобильных устройств */
@@ -143,11 +142,11 @@ canvas {
         <button id="resumeGameBtn">Продолжить</button>
     </div>
     <div id="mobileControls">
-        <button id="leftBtn">←</button>
-        <button id="pauseBtn">Пауза</button>
-        <button id="rightBtn">→</button>
+        <button id="leftBtn" ontouchstart="" ontouchend="">←</button>
+        <button id="pauseBtn" ontouchstart="" ontouchend="">Пауза</button>
+        <button id="rightBtn" ontouchstart="" ontouchend="">→</button>
     </div>
-    <div id="gameOverMenu" style="display: none;">
+      <div id="gameOverMenu" style="display: none;">
         <h1>Игра окончена!</h1>
         <p>Ваш счет: <span id="finalScore">0</span></p>
         <button id="restartGameBtn">Играть снова</button>

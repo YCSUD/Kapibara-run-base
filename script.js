@@ -201,21 +201,20 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('normalModeBtn').addEventListener('click', () => {
         if (!isGameRunning) {
             isChallengeMode = false; // Обычный режим
-            resetGame();
-            hideMainMenu();
-            isGameRunning = true;
-            gameLoop();
+            resetGame(); // Сбрасываем игру
+            hideMainMenu(); // Скрываем главное меню
+            isGameRunning = true; // Запускаем игру
+            gameLoop(); // Запускаем игровой цикл
         }
     });
-
-    // Start the game in challenge mode
+    
     document.getElementById('challengeModeBtn').addEventListener('click', () => {
         if (!isGameRunning) {
             isChallengeMode = true; // Режим испытаний
-            resetGame();
-            hideMainMenu();
-            isGameRunning = true;
-            gameLoop();
+            resetGame(); // Сбрасываем игру
+            hideMainMenu(); // Скрываем главное меню
+            isGameRunning = true; // Запускаем игру
+            gameLoop(); // Запускаем игровой цикл
         }
     });
 
@@ -256,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('gameControls').style.display = 'none';
         document.getElementById('pauseMenu').style.display = 'none';
         isPaused = true;
-        isGameRunning = false;
+        isGameRunning = false; // Останавливаем игру
     }
 
     // Hide main menu
@@ -342,10 +341,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Main game loop
     function gameLoop() {
-        if (!isGameRunning) return;
-
+        if (!isGameRunning) return; // Останавливаем цикл, если игра не запущена
+    
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+    
         if (!isPaused) {
             drawCapybara();
             drawObstacles();
@@ -353,7 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
             drawScore();
             update();
         }
-
+    
         requestAnimationFrame(gameLoop);
     }
 
@@ -362,6 +361,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const rightBtn = document.getElementById('rightBtn');
     const pauseBtn = document.getElementById('pauseBtn');
 
+    document.querySelectorAll('#mobileControls button').forEach(button => {
+        button.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Предотвращает стандартное поведение
+        });
+        button.addEventListener('touchend', (e) => {
+            e.preventDefault(); // Предотвращает стандартное поведение
+        });
+    });
     leftBtn.addEventListener('touchstart', () => {
         isMovingLeft = true;
     });
