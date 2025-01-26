@@ -58,6 +58,16 @@ canvas {
 }
 
 #mobileControls button {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 25px; /* Увеличиваем внутренний отступ */
+    font-size: 28px; /* Увеличиваем размер текста */
+    border: none;
+    border-radius: 15px; /* Закругляем углы */
+    background-color: #ccc;
+    cursor: pointer;
+    min-width: 120px; /* Минимальная ширина кнопок */
+    text-align: center;
     -webkit-tap-highlight-color: transparent; /* Убирает подсветку при касании */
     -webkit-touch-callout: none; /* Отключает вызов контекстного меню */
     user-select: none; /* Запрещает выделение текста */
@@ -73,7 +83,11 @@ canvas {
         display: block; /* Показываем кнопки */
     }
 
-    
+    #mobileControls button {
+        padding: 30px; /* Ещё больше на мобильных */
+        font-size: 32px; /* Ещё больше текст */
+        min-width: 150px; /* Шире кнопки */
+    }
 
     canvas {
         width: 100%; /* Канвас занимает всю ширину экрана */
