@@ -292,11 +292,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Toggle pause state
     function togglePause() {
-        isPaused = !isPaused;
+        isPaused = !isPaused; // Переключаем состояние паузы
         if (isPaused) {
-            showPauseMenu();
+            showPauseMenu(); // Показываем меню паузы
         } else {
-            hidePauseMenu();
+            hidePauseMenu(); // Скрываем меню паузы
         }
     }
 
