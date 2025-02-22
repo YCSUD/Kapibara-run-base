@@ -29,6 +29,19 @@ body {
 
 /* Убедитесь, что кнопки не выделяются */
 button {
+    -webkit-touch-callout: none; /* Отключает вызов контекстного меню при долгом нажатии */
+    -webkit-user-select: none; /* Отключает выделение текста в Safari */
+    -moz-user-select: none; /* Отключает выделение текста в Firefox */
+    -ms-user-select: none; /* Отключает выделение текста в Internet Explorer/Edge */
+    user-select: none; /* Отключает выделение текста в современных браузерах */
+    -webkit-tap-highlight-color: transparent; /* Убирает подсветку при касании */
+    touch-action: manipulation; /* Оптимизирует поведение касаний */
+}
+
+/* Дополнительные стили для iOS */
+button:active, button:focus {
+    outline: none; /* Убирает outline при фокусе */
+    -webkit-tap-highlight-color: transparent; /* Убирает подсветку при касании */
     -webkit-appearance: none; /* Отключает стандартные стили iOS для кнопок */
     appearance: none; /* Отключает стандартные стили для кнопок в современных браузерах */
     background: none; /* Убирает стандартный фон кнопки */
@@ -182,4 +195,3 @@ canvas {
     </div>
     <script src="script.js"></script>
 </body>
-</html>

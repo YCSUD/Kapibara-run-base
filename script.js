@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 resetGame(); // Сбрасываем игру
             }
         });
-    
+
         fruits.forEach((fruit, index) => {
             if (capybara.x < fruit.x + fruit.width &&
                 capybara.x + capybara.width > fruit.x &&
@@ -182,13 +182,13 @@ document.addEventListener('DOMContentLoaded', () => {
             gameSpeed += 2; // Увеличиваем скорость игры на 2
             speedCapybar += 2; // Увеличиваем скорость капибары на 2
             lastHundred = currentHundred; // Обновляем последнюю сотню
-    
+
             if (isChallengeMode) {
                 // Активируем обратное управление с шансом 50%
                 if (Math.random() < 0.5) {
                     activateReverseControls();
                 }
-    
+
                 // Активируем перемещение препятствий с шансом 50%
                 if (Math.random() < 0.5) {
                     activateMovingObstacles();
@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
             gameLoop(); // Запускаем игровой цикл
         }
     });
-    
+
     document.getElementById('challengeModeBtn').addEventListener('click', () => {
         if (!isGameRunning) {
             isChallengeMode = true; // Режим испытаний
@@ -231,14 +231,14 @@ document.addEventListener('DOMContentLoaded', () => {
         isReversedControls = false;
         isMovingObstacles = false;
         lastHundred = 0;
-    
+
         if (obstacleInterval) {
             clearInterval(obstacleInterval);
         }
         if (fruitInterval) {
             clearInterval(fruitInterval);
         }
-    
+
         startNormalObstacleGeneration();
         fruitInterval = setInterval(() => {
             if (!isPaused && isGameRunning) {
@@ -270,11 +270,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function showGameOverMenu() {
         // Показываем окно
         document.getElementById('gameOverMenu').style.display = 'block';
-    
+
         // Обновляем счет в окне
         document.getElementById('finalScore').textContent = score;
     }
-    
+
     function hideGameOverMenu() {
         // Скрываем окно
         document.getElementById('gameOverMenu').style.display = 'none';
@@ -342,9 +342,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Main game loop
     function gameLoop() {
         if (!isGameRunning) return; // Останавливаем цикл, если игра не запущена
-    
+
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+
         if (!isPaused) {
             drawCapybara();
             drawObstacles();
@@ -352,7 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
             drawScore();
             update();
         }
-    
+
         requestAnimationFrame(gameLoop);
     }
 
@@ -368,12 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('touchend', (e) => {
             e.preventDefault(); // Предотвращает стандартное поведение
         });
-        // Отключаем контекстное меню при долгом нажатии
-        button.addEventListener('contextmenu', (e) => {
-            e.preventDefault();
-        });
     });
-
     leftBtn.addEventListener('touchstart', () => {
         isMovingLeft = true;
     });
@@ -392,7 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault(); // Предотвращаем стандартное поведение
         togglePause(); // Вызываем функцию паузы
     });
-    
+
     pauseBtn.addEventListener('touchend', (e) => {
         e.preventDefault(); // Предотвращаем стандартное поведение
     });
@@ -403,8 +398,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('returnToMenuBtn').addEventListener('click', () => {
         showMainMenu();
     });
-    
-    
 
     // Resume game from pause menu
     document.getElementById('resumeGameBtn').addEventListener('click', () => {
