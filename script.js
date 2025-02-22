@@ -383,6 +383,15 @@ document.addEventListener('DOMContentLoaded', () => {
         isMovingRight = false;
     });
 
+    pauseBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault(); // Предотвращаем стандартное поведение
+        togglePause(); // Вызываем функцию паузы
+    });
+    
+    pauseBtn.addEventListener('touchend', (e) => {
+        e.preventDefault(); // Предотвращаем стандартное поведение
+    });
+
     pauseBtn.addEventListener('click', togglePause);
 
     // Return to main menu and reload the game
