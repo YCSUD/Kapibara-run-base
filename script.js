@@ -368,7 +368,12 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('touchend', (e) => {
             e.preventDefault(); // Предотвращает стандартное поведение
         });
+        // Отключаем контекстное меню при долгом нажатии
+        button.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+        });
     });
+
     leftBtn.addEventListener('touchstart', () => {
         isMovingLeft = true;
     });
