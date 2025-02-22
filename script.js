@@ -398,6 +398,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('returnToMenuBtn').addEventListener('click', () => {
         showMainMenu();
     });
+    
+    
 
     // Resume game from pause menu
     document.getElementById('resumeGameBtn').addEventListener('click', () => {
